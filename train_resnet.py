@@ -13,8 +13,10 @@ from classification.pre_process.Preprocessing import Preprocessing
 from classification.model.resnet50 import *
 from utils.modality_CT import *
 
+#chemin des fichiers labelisés à récuperer via le site
+json_path = '/media/deeplearning/78ca2911-9e9f-4f78-b80a-848024b95f92/result.json' 
 
-json_path = '/media/deeplearning/78ca2911-9e9f-4f78-b80a-848024b95f92/result.json'
+#un répertoire pour mettre les résultats
 nifti_directory = '/media/deeplearning/78ca2911-9e9f-4f78-b80a-848024b95f92'
 objet = Prep_CSV(json_path)
 objet.result_csv(nifti_directory)
