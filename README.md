@@ -2,5 +2,5 @@
 
 Project realised during  1 year apprenticeship at IUCT Oncopole, Toulouse. 
 
-# Classification model : \\
+# Classification model : 
 Determine the acquisition field with MIP of CT-Scan, using different model. 
