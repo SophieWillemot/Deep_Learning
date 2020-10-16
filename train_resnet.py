@@ -1,16 +1,18 @@
 import SimpleITK as sitk 
 import numpy as np 
 import matplotlib.pyplot as plt 
-from library_dicom.dicom_processor.tools.preprocessing import *
 import json 
 import csv 
-from sklearn.model_selection import train_test_split 
-import tensorflow as tf 
-from classification.Prep_CSV import Prep_CSV
-from classification.Preprocessing import Preprocessing 
-from classification.resnet50 import *
 import os 
 import pandas as pd 
+import tensorflow as tf 
+from sklearn.model_selection import train_test_split 
+
+from classification.pre_process.Prep_CSV import Prep_CSV
+from classification.pre_process.Preprocessing import Preprocessing 
+from classification.model.resnet50 import *
+from utils.modality_CT import *
+
 
 json_path = '/media/deeplearning/78ca2911-9e9f-4f78-b80a-848024b95f92/result.json'
 nifti_directory = '/media/deeplearning/78ca2911-9e9f-4f78-b80a-848024b95f92'
@@ -90,15 +92,6 @@ hist_json_file = 'history.json'
 with open('/home/deeplearning/Dicom-To-CNN/Classification/Resnet'+'/'+hist_json_file, mode = 'w') as f : 
     hist_df.to_json(f)
 print("history saved")
-
-
-#print(y_val)
-#predictions = model.predict(X_val[0:10])
-#print("Predictions done !")
-#print(predictions)
-#from classification.resnet50 import predictions_decoding 
-#predi = predictions_decoding(predictions)
-#print(predi)
 
 #save 
 folder = '/media/deeplearning/78ca2911-9e9f-4f78-b80a-848024b95f92/Classification/Resnet_png'

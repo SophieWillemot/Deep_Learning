@@ -1,7 +1,7 @@
 import numpy as np 
 import SimpleITK as sitk 
 import csv
-from classification.Prep_Instance import Prep_Instance
+from classification.pre_process.Prep_Instance import Prep_Instance
 
 
 class Preprocessing:
