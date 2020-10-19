@@ -34,8 +34,60 @@ print("")
 print("size of X_val : ", X_val.shape)
 print("size of y_val : ",y_val.shape)
 
-plt.imshow(X_train[0])
-plt.show()
 
 model = classic_model(input_shape=(503, 136, 1))
 model.summary()
+
+optimizer = tf.keras.optimizers.Adam(learning_rate=1e-3) #param
+model.compile(optimizer = optimizer, 
+        loss={'left_arm' : 'sparse_categorical_crossentropy', 
+            'right_arm' : 'sparse_categorical_crossentropy', 
+             'head' : 'sparse_categorical_crossentropy', 
+             'leg' : 'sparse_categorical_crossentropy'}, 
+        loss_weights ={'left_arm': 0.25, 'right_arm' : 0.25, 
+                        'head' : 0.25, 
+                        'leg': 0.25}, 
+        metrics = {'left_arm': ['accuracy'], #'SparseCategoricalCrossentropy'
+                    'right_arm' : ['accuracy'], 
+                    'head' : ['accuracy'], 
+                    'leg':['accuracy']}) #a voir pour loss
+
+
+log_dir = '/home/deeplearning/Deep_Learning/classification/test/classic/logs_19_10_2020'
+if not os.path.exists(log_dir):
+    os.makedirs(log_dir)
+
+tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, update_freq='epoch', write_graph=True, write_images=True)
+
+#fit 
+
+history = model.fit(X_train, {'head': y_train[:,0], 
+                                    'leg': y_train[:,1],
+                                    'right_arm' : y_train[:,2],
+                                    'left_arm' : y_train[:,3] ,
+                                    }, 
+                                    
+                        epochs = 50, 
+                        batch_size = 128, 
+                        verbose = 1, 
+                        #validation_split= 0.20,
+                        validation_data = (X_val, {'head': y_val[:,0], 
+                                    'leg': y_val[:,1],
+                                    'right_arm' : y_val[:,2],
+                                    'left_arm' : y_val[:,3] ,
+                                    }),
+                        callbacks=[tensorboard_callback])
+
+
+
+hist_df = pd.DataFrame(history.history)
+hist_json_file = 'history.json'
+with open('/home/deeplearning/Deep_Learning/classification/test/classic'+'/'+hist_json_file, mode = 'w') as f : 
+    hist_df.to_json(f)
+print("history saved")
+
+#save 
+folder = '/home/deeplearning/Deep_Learning/classification/test/classic'
+if not os.path.exists(folder) : 
+    os.makedirs(folder)
+model.save(folder + '/' + 'classic_model', save_format='h5')
