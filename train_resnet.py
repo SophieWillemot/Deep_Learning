@@ -11,13 +11,14 @@ from sklearn.model_selection import train_test_split
 from classification.pre_process.Prep_CSV import Prep_CSV
 from classification.pre_process.Preprocessing import Preprocessing 
 from classification.model.resnet50 import *
+from classification.model.unet import *
 from utils.modality_CT import *
 
 #chemin des fichiers labelisés à récuperer via le site
-json_path = '/media/deeplearning/78ca2911-9e9f-4f78-b80a-848024b95f92/result.json' 
+json_path = 'Résultats/result.json' 
 
 #un répertoire pour mettre les résultats
-nifti_directory = '/media/deeplearning/78ca2911-9e9f-4f78-b80a-848024b95f92'
+nifti_directory = 'Résultats'
 objet = Prep_CSV(json_path)
 objet.result_csv(nifti_directory)
 print(objet.csv_result_path)
@@ -40,7 +41,10 @@ plt.imshow(X_train[0])
 plt.show()
 
 #model 
-model = ResNet50(input_shape=(503, 136, 1)) #(1024, 256, 1)
+#model = ResNet50(input_shape=(503, 136, 1)) #(1024, 256, 1)
+#model.summary()
+
+model = create_model()
 model.summary()
 
 #compile 

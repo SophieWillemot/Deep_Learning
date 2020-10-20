@@ -70,15 +70,19 @@ class Prep_CSV :
 
             maj_data.append(liste)
         
-        folder = os.listdir('/media/deeplearning/Elements/classif_ct/image_a_annoter') 
+        #folder = os.listdir('/media/deeplearning/Elements/classif_ct/image_a_annoter')
+        new_path = 'Champ_Acquisition_CT'
+        folder = os.listdir(new_path) 
         
         for image in maj_data : 
             study_uid = image[0]
             for fold in folder : 
-                liste_mip = os.listdir('/media/deeplearning/Elements/classif_ct/image_a_annoter'+'/'+fold)
+                #liste_mip = os.listdir('/media/deeplearning/Elements/classif_ct/image_a_annoter'+'/'+fold)
+                liste_mip = os.listdir(new_path+'/'+fold)
                 for mip in liste_mip : 
                     if study_uid in mip : 
-                        image.append('/media/deeplearning/Elements/classif_ct/image_a_annoter'+'/'+fold+'/'+mip)
+                        #image.append('/media/deeplearning/Elements/classif_ct/image_a_annoter'+'/'+fold+'/'+mip)
+                        image.append(new_path+'/'+fold+'/'+mip)
 
 
         with open(os.path.join(nifti_directory, 'classif_test_png.csv'), 'w') as csv_file : 

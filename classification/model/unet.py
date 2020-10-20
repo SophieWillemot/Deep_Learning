@@ -98,9 +98,10 @@ class CustomUNet3D(object):
         # bottleneck
         x = self.bottleneck(x, num_filters=self.filters[-1])
 
+        # pas besoin de l'expansion
         # expansion/decoder
-        for i in reversed(range(len(self.filters) - 1)):
-            x = self.expansion_block(x, forwards[i], num_filters=self.filters[i])
+        #for i in reversed(range(len(self.filters) - 1)):
+        #    x = self.expansion_block(x, forwards[i], num_filters=self.filters[i])
 
         # final layer
         logits = self.final_convolution(x)
