@@ -53,7 +53,7 @@ model.compile(optimizer = optimizer,
                     'leg':['accuracy']}) #a voir pour loss
 
 
-log_dir = '/home/deeplearning/Deep_Learning/classification/test/classic/logs_19_10_2020'
+log_dir = '/home/deeplearning/Deep_Learning/classification/test/classic_2/logs_21_10_2020'
 if not os.path.exists(log_dir):
     os.makedirs(log_dir)
 
@@ -67,8 +67,8 @@ history = model.fit(X_train, {'head': y_train[:,0],
                                     'left_arm' : y_train[:,3] ,
                                     }, 
                                     
-                        epochs = 50, 
-                        batch_size = 128, 
+                        epochs = 20, 
+                        batch_size = 256, 
                         verbose = 1, 
                         #validation_split= 0.20,
                         validation_data = (X_val, {'head': y_val[:,0], 
@@ -82,12 +82,12 @@ history = model.fit(X_train, {'head': y_train[:,0],
 
 hist_df = pd.DataFrame(history.history)
 hist_json_file = 'history.json'
-with open('/home/deeplearning/Deep_Learning/classification/test/classic'+'/'+hist_json_file, mode = 'w') as f : 
+with open('/home/deeplearning/Deep_Learning/classification/test/classic_2'+'/'+hist_json_file, mode = 'w') as f : 
     hist_df.to_json(f)
 print("history saved")
 
 #save 
-folder = '/home/deeplearning/Deep_Learning/classification/test/classic'
+folder = '/home/deeplearning/Deep_Learning/classification/test/classic_2'
 if not os.path.exists(folder) : 
     os.makedirs(folder)
 model.save(folder + '/' + 'classic_model', save_format='h5')
