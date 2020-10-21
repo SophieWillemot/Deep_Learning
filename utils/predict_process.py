@@ -13,10 +13,10 @@ def decodage_predictions(array):
             if j == 0 : #head 
                 if index == 0 : 
                     sub_result.append('Vertex')
-                elif index == 1  : 
-                    sub_result.append('Eye')
+                #elif index == 1  : 
+                    #sub_result.append('Eye')
                 else : 
-                    sub_result.append('Mouth')
+                    sub_result.append('Eye / Mouth')
             elif j == 1 : #leg 
                 if index == 0 : 
                     sub_result.append('Hips')
@@ -48,10 +48,12 @@ def decodage_truth(array) :
         #head
         if liste[0] == 0 : 
             sub.append('Vertex')
-        if liste[0] == 1 : 
-            sub.append('Eye')
-        if liste[0] == 2 : 
-            sub.append('Mouth')
+        else : 
+            sub.append('Eye / Mouth')
+        #if liste[0] == 1 : 
+        #    sub.append('Eye')
+        #if liste[0] == 2 : 
+            #sub.append('Mouth')
         #leg 
         if liste[1] == 0 : 
             sub.append('Hips')
@@ -75,7 +77,7 @@ def decodage_truth(array) :
     return truth 
         
 
-def affichage(liste_array, liste_label, liste_true_label):
+def affichage(liste_array, liste_label, liste_true_label, directory):
     for i in range(len(liste_array)):
         image = liste_array[i][:,:,0]
         f = plt.figure(figsize=(5,8))
@@ -86,12 +88,12 @@ def affichage(liste_array, liste_label, liste_true_label):
         plt.show()
 
         if liste_label[i] == liste_true_label[i] : 
-            filename = '/home/deeplearning/Deep_Learning/classification/test/classic_2/predictions/true'+'/'+str(i)+'.png'
+            filename = directory + '/predictions/true'+'/'+str(i)+'.png'
             f.savefig(filename, bbox_inches='tight') 
             plt.close()
 
         else : 
-            filename = '/home/deeplearning/Deep_Learning/classification/test/classic_2/predictions/false'+'/'+str(i)+'.png'
+            filename = directory + '/predictions/false'+'/'+str(i)+'.png'
             f.savefig(filename, bbox_inches='tight') 
             plt.close()
 
