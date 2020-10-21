@@ -40,7 +40,6 @@ def decodage_predictions(array):
     return result
 
 
-
 def decodage_truth(array) : 
     truth = []
     for i in range(array.shape[0]): 
@@ -50,7 +49,7 @@ def decodage_truth(array) :
         if liste[0] == 0 : 
             sub.append('Vertex')
         if liste[0] == 1 : 
-            sub.append('Eyes')
+            sub.append('Eye')
         if liste[0] == 2 : 
             sub.append('Mouth')
         #leg 
@@ -75,10 +74,6 @@ def decodage_truth(array) :
 
     return truth 
         
-        
-
-        
-
 
 def affichage(liste_array, liste_label, liste_true_label):
     for i in range(len(liste_array)):
@@ -89,6 +84,15 @@ def affichage(liste_array, liste_label, liste_true_label):
         plt.imshow(image, cmap='gray')
         plt.title("pred : {}, truth : {}".format(liste_label[i], liste_true_label[i]))
         plt.show()
-        filename = '/home/deeplearning/Deep_Learning/classification/test/classic_2/predictions'+'/'+str(i)+'.png'
-        f.savefig(filename, bbox_inches='tight') 
-        plt.close()
+
+        if liste_label[i] == liste_true_label[i] : 
+            filename = '/home/deeplearning/Deep_Learning/classification/test/classic_2/predictions/true'+'/'+str(i)+'.png'
+            f.savefig(filename, bbox_inches='tight') 
+            plt.close()
+
+        else : 
+            filename = '/home/deeplearning/Deep_Learning/classification/test/classic_2/predictions/false'+'/'+str(i)+'.png'
+            f.savefig(filename, bbox_inches='tight') 
+            plt.close()
+
+
