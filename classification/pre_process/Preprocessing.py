@@ -2,6 +2,7 @@ import numpy as np
 import SimpleITK as sitk 
 import csv
 from classification.pre_process.Prep_Instance import Prep_Instance
+import pandas as pd 
 
 
 class Preprocessing:
@@ -35,8 +36,11 @@ class Preprocessing:
         #label_val = []
         for serie in self.dataset : 
             #if "train" in serie : 
+            #sub = []
             instance_object = Prep_Instance(serie[1]) 
             instance_array = instance_object.ct_array #matrice normalisé
+            #sub.append(serie[0])
+            #sub.append(instance_array)
             liste.append(instance_array)
                 
                 #encoding
@@ -59,7 +63,6 @@ class Preprocessing:
                 #encoding
                 #subliste = instance_object.encoding_instance(serie)
                 #label_val.append(subliste)
-            
         return np.asarray(liste), np.asarray(label)
 
 

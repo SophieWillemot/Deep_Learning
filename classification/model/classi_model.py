@@ -23,20 +23,26 @@ def classic_model(input_shape=(503, 136, 1)):
     x = MaxPooling2D(pool_size=(2,2), name='max_pool1')(x)
     x = Conv2D(64, (3,3), name ='conv2', activation = 'relu')(x)
     x = MaxPooling2D(pool_size=(2,2), name='max_pool2')(x)
-    x = Dropout(rate = 0.25, name='dropout1')(x)
+    #x = Dropout(rate = 0.5, name='dropout1')(x)
 
     x = Conv2D(64, (3,3), name='conv3', activation='relu')(x)
     x = MaxPooling2D(pool_size=(2,2), name = 'max_pool3')(x)
-    x = Dropout(rate=0.5, name='dropout2')(x)
+    #x = Dropout(rate=0.5, name='dropout2')(x)
 
 
     x = Flatten(name ='flatten')(x)
 
-    #final output
+    #dense layer and final output
+
+    x = Dense(256, activation= 'relu', name='dense_1')(x)
+    x = Dropout(rate = 0.5, name='dropout_1')(x) 
+    x = Dense(128, activation= 'relu', name= 'dense_2')(x) 
+    x = Dropout(rate = 0.5, name = 'dropout_2')(x)
+
     left_arm = Dense(2, activation='softmax', name='left_arm')(x)
     right_arm = Dense(2, activation='softmax', name = 'right_arm')(x)
 
-    head = Dense(3, activation='softmax', name='head')(x)
+    head = Dense(2, activation='softmax', name='head')(x)
     leg = Dense(3, activation='softmax', name='leg')(x)
 
     model = Model(inputs = x_input, outputs = [head, leg, right_arm, left_arm], name='classic_model')
