@@ -36,8 +36,8 @@ def classic_model(input_shape=(503, 136, 1)):
     left_arm = Dense(2, activation='softmax', name='left_arm')(x)
     right_arm = Dense(2, activation='softmax', name = 'right_arm')(x)
 
-    head = Dense(2, activation='softmax', name='head')(x)
-    leg = Dense(2, activation='softmax', name='leg')(x)
+    head = Dense(3, activation='softmax', name='head')(x)
+    leg = Dense(3, activation='softmax', name='leg')(x)
 
     model = Model(inputs = x_input, outputs = [head, leg, right_arm, left_arm], name='classic_model')
     return model 

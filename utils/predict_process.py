@@ -12,14 +12,18 @@ def decodage(array):
             index = a.index(maxi)
             if j == 0 : #head 
                 if index == 0 : 
-                    sub_result.append('vertex')
+                    sub_result.append('Vertex')
+                elif index == 1  : 
+                    sub_result.append('Eye')
                 else : 
-                    sub_result.append('Mouth/eye')
+                    sub_result.append('Mouth')
             elif j == 1 : #leg 
                 if index == 0 : 
                     sub_result.append('Hips')
+                elif index == 1 : 
+                    sub_result.append('Knee')
                 else : 
-                    sub_result.append('Knee/Foot')
+                    sub_result.append('Foot')
 
             elif j == 2 : #right arm 
                 if index == 0 : 

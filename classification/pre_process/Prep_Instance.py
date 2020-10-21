@@ -44,18 +44,18 @@ class Prep_Instance :
         #upper Limit 
         if liste[2] == 'Vertex' : 
             label.append(0)
-        if liste[2] == 'Eye' or liste[2] == 'Mouth' : 
+        if liste[2] == 'Eye' : # or liste[2] == 'Mouth' : 
             label.append(1)
-        #if liste[2] == 'Mouth':
-            #label.append(2)
+        if liste[2] == 'Mouth':
+            label.append(2)
 
         #lower Limit
         if liste[3] == 'Hips' : 
             label.append(0)
-        if liste[3] == 'Knee' or liste[3] == 'Foot': 
+        if liste[3] == 'Knee': # or liste[3] == 'Foot': 
             label.append(1)
-        #if liste[3] == 'Foot':
-            #label.append(2)
+        if liste[3] == 'Foot':
+            label.append(2)
 
         #right Arm 
         if liste[4] == 'down' : 
