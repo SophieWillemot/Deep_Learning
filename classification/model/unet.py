@@ -63,13 +63,9 @@ class CustomUNet2D(object):
         return layer
 
     def compression_block(self, input_, num_filters):
-        """
-            output : (forward_output, maxpooled_output)
-        """
         layer1 = self.double_convolution(input_, num_filters)
         layer2 = self.maxpooling(layer1)
         layer3 = tf.keras.layers.BatchNormalization()(layer2)
-        #return (layer1, layer3)
         return layer3
 
     def bottleneck(self, input_, num_filters):
@@ -88,19 +84,14 @@ class CustomUNet2D(object):
         input_ = tf.keras.layers.Input(shape=self.image_shape, dtype=tf.float32, name="input")
 
         x = input_
-        #forwards = []
 
         # compression/encoder
         for i in range(len(self.filters) - 1):
-            #(forward, x) = self.compression_block(x, num_filters=self.filters[i])
-            #forwards.append(forward)
             x = self.compression_block(x, num_filters=self.filters[i])
 
-        #à voir si ya besoin de l'enlever
         # bottleneck
         #x = self.bottleneck(x, num_filters=self.filters[-1])
 
-        # pas besoin de l'expansion
         # expansion/decoder
         #for i in reversed(range(len(self.filters) - 1)):
         #    x = self.expansion_block(x, forwards[i], num_filters=self.filters[i])
