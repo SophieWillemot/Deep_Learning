@@ -10,7 +10,7 @@ class CustomUNet2D(object):
 
     def __init__(self,
                  image_shape,
-                 filters=(8, 16, 32, 64, 128),
+                 filters=(8, 16, 32),
                  kernel=(3, 3),
                  activation=tf.keras.layers.LeakyReLU(),
                  padding='same',
@@ -113,12 +113,6 @@ class CustomUNet2D(object):
         x = tf.keras.layers.Flatten()(x)
 
         #final output
-        #left_arm = tf.keras.layers.Softmax(name='left_arm')(x)#(logits)
-        #right_arm = tf.keras.layers.Softmax(name='right_arm')(x)#(logits)
-
-        #head = tf.keras.layers.Softmax(name='head')(x)#(logits)
-        #leg = tf.keras.layers.Softmax(name='leg')(x)#(logits)
-
         left_arm = tf.keras.layers.Dense(2, activation='softmax', name='left_arm')(x)
         right_arm = tf.keras.layers.Dense(2, activation='softmax', name = 'right_arm')(x)
 
